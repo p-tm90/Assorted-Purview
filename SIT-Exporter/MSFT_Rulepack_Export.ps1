@@ -1,1 +1,3 @@
-. .\Dependencies\ModuleConnectionFunctions.ps1
+. .\ModuleConnectionFunctions.
+
+Configure-MicrosoftModules -TypeOfConfiguration Purview -Scope CurrentUser

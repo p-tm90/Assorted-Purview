@@ -67,7 +67,7 @@ function Configure-MicrosoftModules{
         [string]$TypeOfConfiguration,
         [Parameter(Mandatory="True",Position="0")]
         [ValidateSet("CurrentUser","Device")]
-        [String]$InstallScope
+        [String]$Scope
     )
 
     #Capture current installed module list, then compare against web modules and update as needed.
