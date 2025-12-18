@@ -1,8 +1,3 @@
-Set-Location $PSScriptRoot
-. .\ModuleConnectionFunctions.ps1
-
-Configure-MicrosoftModules -TypeOfConfiguration Purview -Scope CurrentUser
-
 #Update modules & set up the connections
 Write-Host "Do you need to update modules and connect to Microsoft Purview?"
 $ConnectChoice = Read-Host "Type Y to update and connect, or any other key to skip"
@@ -28,21 +23,21 @@ Foreach ($Pack in $SITRulePacks){
     #Regular Export
     Write-Host "Exporting Rule Pack: $($Pack.RuleCollectionName)" -ForegroundColor Green
     
-    $xml = New-Object System.Xml.XmlDocument
-    $xml.PreserveWhitespace = $false
-    $xml.LoadXml($Pack.ClassificationRuleCollectionXml)
+    $Xml = New-Object System.Xml.XmlDocument
+    $Xml.PreserveWhitespace = $False
+    $Xml.LoadXml($Pack.ClassificationRuleCollectionXml)
 
-    $settings = New-Object System.Xml.XmlWriterSettings
-    $settings.Indent = $true
-    $settings.IndentChars = '  '       # two spaces; change to "`t" for tabs
-    $settings.NewLineChars = "`r`n"
-    $settings.NewLineHandling = 'Replace'
-    $settings.Encoding = [System.Text.Encoding]::UTF8
+    $Settings = New-Object System.Xml.XmlWriterSettings
+    $Settings.Indent = $True
+    $Settings.IndentChars = '  '       # two spaces; change to "`t" for tabs
+    $Settings.NewLineChars = "`r`n"
+    $Settings.NewLineHandling = 'Replace'
+    $Settings.Encoding = [System.Text.Encoding]::UTF8
 
-    $outFile = Join-Path $outDir ("{0}_{1}_RulePack.xml" -f $Date, $Pack.RuleCollectionName)
-    $writer = [System.Xml.XmlWriter]::Create($outFile, $settings)
-    $xml.Save($writer)
+    $OutFile = Join-Path "$Location\Outputs" ("{0}_{1}_RulePack.xml" -f $Date, $Pack.RuleCollectionName)
+    $Writer = [System.Xml.XmlWriter]::Create($OutFile, $Settings)
+    $Xml.Save($Writer)
     $writer.Close()
 
-    Write-Host "Formatted XML saved to: $outFile" -ForegroundColor Green
+    Write-Host "Formatted XML saved to: $($OutFile)" -ForegroundColor Green
 }
