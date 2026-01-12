@@ -1,4 +1,5 @@
-. .\Prerequisites.ps1
+.\Data-Lifecycle-Management-Scripts\Prerequisites.ps1
+
 
 Configure-MicrosoftModules -TypeOfConfiguration Purview -InstallScope CurrentUser
 
