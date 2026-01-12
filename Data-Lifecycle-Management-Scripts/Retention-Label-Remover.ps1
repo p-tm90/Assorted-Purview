@@ -1,4 +1,4 @@
-.\Data-Lifecycle-Management-Scripts\Prerequisites.ps1
+. "$PSScriptRoot\Prerequisites.ps1"
 
 
 Configure-MicrosoftModules -TypeOfConfiguration Purview -InstallScope CurrentUser
